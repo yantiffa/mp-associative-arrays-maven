@@ -1,7 +1,8 @@
 Associative Arrays
 ==================
+Author: Tiffany Yan
 
-Starter code for a CSC-207 project on associative arrays.
+This is my miniproject assignment for CSC207 class.
+The repo includes:
 
-_Students must replace the contents of this file with appropriate
-contents, including class, author, date, and URL._
+https://github.com/yantiffa/mp-associative-arrays-maven
