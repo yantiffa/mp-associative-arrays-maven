@@ -34,7 +34,7 @@ public class AssociativeArray<K, V> {
   /**
    * The array of key/value pairs.
    */
-  KVPair<K, V> pairs[];
+  KVPair<K, V>[] pairs;
 
   // +--------------+------------------------------------------------
   // | Constructors |
@@ -61,13 +61,13 @@ public class AssociativeArray<K, V> {
    * @return a new copy of the array
    */
   public AssociativeArray<K, V> clone() {
-    AssociativeArray<K,V> clonearr = new AssociativeArray<>();
+    AssociativeArray<K, V> clonearr = new AssociativeArray<>();
     for (int i = 0; i < this.size; i++) {
       if (this.pairs[i].key != null) {
-        try{
+        try {
           clonearr.set(this.pairs[i].key, this.pairs[i].val);
         } catch (NullKeyException e) {
-            System.err.println("The key should not be NULL!");
+          System.err.println("The key should not be NULL!");
         } //try
       } //if
     } //for
@@ -95,9 +95,9 @@ public class AssociativeArray<K, V> {
    * Set the value associated with key to value. Future calls to
    * get(key) will return value.
    *
-   * @param K
+   * @param key
    *   The key whose value we are seeting.
-   * @param V
+   * @param value
    *   The value of that key.
    *
    * @throws NullKeyException
@@ -108,14 +108,14 @@ public class AssociativeArray<K, V> {
       throw new NullKeyException();
     } //if
 
-    try{
+    try {
       int i = find(key);
       this.pairs[i].val = value;
     } catch (KeyNotFoundException e) {
-        if (this.size == this.pairs.length) {
-          expand();
-        }
-        this.pairs[this.size++] = new KVPair<>(key,value);
+      if (this.size == this.pairs.length) {
+        expand();
+      } //if
+      this.pairs[this.size++] = new KVPair<>(key, value);
     } //if
   } // set(K,V)
 
@@ -124,6 +124,8 @@ public class AssociativeArray<K, V> {
    *
    * @param key
    *   A key
+   *
+   * @return the value associated with the key
    *
    * @throws KeyNotFoundException
    *   when the key is null or does not appear in the associative array.
@@ -136,6 +138,9 @@ public class AssociativeArray<K, V> {
   /**
    * Determine if key appears in the associative array. Should
    * return false for the null key.
+   * @param key
+   *  A key
+   * @return true of key appears in the associate array, else return false
    */
   public boolean hasKey(K key) {
     Boolean record = false;
@@ -152,9 +157,11 @@ public class AssociativeArray<K, V> {
    * Remove the key/value pair associated with a key. Future calls
    * to get(key) will throw an exception. If the key does not appear
    * in the associative array, does nothing.
+   * @param key
+   *  A key
    */
   public void remove(K key) {
-    try{
+    try {
       int i = find(key);
       //make sure we move everything to the left by one, after remove the orginal one.
       for (int index = i; index < this.size - 1; i++) {
@@ -169,6 +176,8 @@ public class AssociativeArray<K, V> {
 
   /**
    * Determine how many key/value pairs are in the associative array.
+   *
+   * @return the number of key/value pairs in the associate array
    */
   public int size() {
     return this.size;
@@ -192,6 +201,8 @@ public class AssociativeArray<K, V> {
    * @param key
    *   The key of the entry.
    *
+   * @return the index of the first entry of the pair that contains the key
+   *
    * @throws KeyNotFoundException
    *   If the key does not appear in the associative array.
    */
@@ -201,7 +212,7 @@ public class AssociativeArray<K, V> {
         return i;
       } //if
     } //for
-    throw new KeyNotFoundException(); 
+    throw new KeyNotFoundException();
   } // find(K)
 
 } // class AssociativeArray
