@@ -68,7 +68,7 @@ public class AssociativeArray<K, V> {
           clonearr.set(this.pairs[i].key, this.pairs[i].val);
         } catch (NullKeyException e) {
           System.err.println("The key should not be NULL!");
-        } //try
+        } //try/catch
       } //if
     } //for
     return clonearr;
@@ -82,7 +82,11 @@ public class AssociativeArray<K, V> {
   public String toString() {
     String strform = "{";
     for (int i = 0; i < this.size; i++) {
-      strform = strform + this.pairs[i].key + ":" + this.pairs[i].val + ", ";
+      if (i + 1 >= this.size) {
+        strform = strform + this.pairs[i].key + ":" + this.pairs[i].val + "}";
+      } else {
+        strform = strform + this.pairs[i].key + ":" + this.pairs[i].val + ", ";
+      } //if
     } //for
     return strform;
   } // toString()
@@ -143,14 +147,12 @@ public class AssociativeArray<K, V> {
    * @return true of key appears in the associate array, else return false
    */
   public boolean hasKey(K key) {
-    Boolean record = false;
     for (int i = 0; i < this.size; i++) {
-      if (this.pairs[i].key == key) {
-        record = true;
-        break;
+      if (this.pairs[i].key.equals(key)) {
+        return true;
       } //if
     } //for
-    return record;
+    return false;
   } // hasKey(K)
 
   /**
@@ -164,13 +166,13 @@ public class AssociativeArray<K, V> {
     try {
       int i = find(key);
       //make sure we move everything to the left by one, after remove the orginal one.
-      for (int index = i; index < this.size - 1; i++) {
-        this.pairs[i] = this.pairs[i + 1];
+      for (int index = i; index < this.size - 1; index++) {
+        this.pairs[index] = this.pairs[index + 1];
       } //for
-      this.size -= 1;
+      this.size = this.size - 1;
       this.pairs[this.size] = null;
     } catch (KeyNotFoundException e) {
-    } //try
+    } //try/catch
 
   } // remove(K)
 

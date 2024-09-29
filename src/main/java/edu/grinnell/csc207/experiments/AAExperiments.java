@@ -1,8 +1,8 @@
 package edu.grinnell.csc207.experiments;
 
-import java.io.PrintWriter;
-
 import edu.grinnell.csc207.util.AssociativeArray;
+
+import java.io.PrintWriter;
 
 /**
  * Experiments with Associative Arrays.
@@ -113,6 +113,7 @@ public class AAExperiments {
     set(pen, strings2strings, null, "nothing");
     hasKey(pen, strings2strings, null);
     get(pen, strings2strings, null);
+
     // And we're done.
     pen.close();
   } // main(String[])
