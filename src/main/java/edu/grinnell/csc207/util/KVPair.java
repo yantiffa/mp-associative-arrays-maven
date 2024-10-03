@@ -8,7 +8,7 @@ package edu.grinnell.csc207.util;
  *   The type of the keys.
  * @param <V>
  *   The type of the values.
- * 
+ *
  * @author Samuel A. Rebelsky
  */
 class KVPair<K, V> {
